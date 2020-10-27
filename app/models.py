@@ -338,3 +338,4 @@ class Nuevos(db.Model):
     indigena: int
     toma_muestra: int
     clasificacion_final: int
+

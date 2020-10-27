@@ -11,7 +11,8 @@ class Config:
     # SQLite for this example
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:12345@localhost/covid'
     DATABASE_CONNECT_OPTIONS = {}
-
+    SQLALCHEMY_POOL_SIZE = 20
+    SQLALCHEMY_MAX_OVERFLOW = 10
     # Application threads. A common general assumption is
     # using 2 per available processor cores - to handle
     # incoming requests using one and performing background
