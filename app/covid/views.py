@@ -1,8 +1,38 @@
 from . import covid
-from app.models import Estados, Municipios, Registros, Cambios, Historia, Nuevos
+from app.models import Estados, Municipios, Registros, Cambios, Historia, Nuevos, Nacionalidad, Origen, Resultado,\
+    Sector, Sexo, Tipo_paciente
 import json
 from flask import jsonify, make_response
 
+@covid.route('/sector/')
+def sector():
+    sector = Sector.query.all()
+    return make_response(jsonify(sector), 200)
+
+@covid.route('/sexo/')
+def sexo():
+    sexo = Sexo.query.all()
+    return make_response(jsonify(sexo), 200)
+
+@covid.route('/tipo_paciente/')
+def tipo_paciente():
+    tipo_paciente = Tipo_paciente.query.all()
+    return make_response(jsonify(tipo_paciente), 200)
+
+@covid.route('/resultado/')
+def resultado():
+    resultado = Resultado.query.all()
+    return make_response(jsonify(resultado), 200)
+
+@covid.route('/origen/')
+def origen():
+    origen = Origen.query.all()
+    return make_response(jsonify(origen), 200)
+
+@covid.route('/nacionalidad/')
+def nacionalidad():
+    nacionalidad = Nacionalidad.query.all()
+    return make_response(jsonify(nacionalidad), 200)
 
 @covid.route('/municipios/')
 def muni():
@@ -39,6 +69,8 @@ def nuevos():
     print(nuevos.query.count())
     return make_response(jsonify(nuevos), 200)
 
-@covid.route('/hola/')
-def hola():
-    return 'hola mundo'
+@covid.route('/')
+def home():
+
+
+    return 'routes'

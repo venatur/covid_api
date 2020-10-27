@@ -18,6 +18,33 @@ class Estados(db.Model):
         self.abrev = abreviatura
 
 @dataclass
+class Nacionalidad(db.Model):
+    __tablename__='nacionalidad'
+    clave = db.Column(db.Text(), primary_key=True, nullable=False)
+    descripcion = db.Column(db.Text(),nullable=False)
+
+    clave: int
+    descripcion: str
+
+@dataclass
+class Origen(db.Model):
+    __tablename__='origen'
+    clave = db.Column(db.Text(), primary_key=True, nullable=False)
+    descripcion = db.Column(db.Text(),nullable=False)
+
+    clave: int
+    descripcion: str
+
+@dataclass
+class Resultado(db.Model):
+    __tablename__='resultado'
+    clave = db.Column(db.Text(), primary_key=True, nullable=False)
+    descripcion = db.Column(db.Text(),nullable=False)
+
+    clave: int
+    descripcion: str
+
+@dataclass
 class Municipios(db.Model):
     __tablename__ = 'municipios'
     clave_municipio = db.Column(db.Text(), primary_key=True, nullable=False)
@@ -41,6 +68,33 @@ class Registros(db.Model):
 
     diarios: int
     fecha: int
+
+@dataclass
+class Sector(db.Model):
+    __tablename__ = 'sector'
+    clave = db.Column(db.Text(), nullable=False)
+    descripcion = db.Column(db.Text(), primary_key=True, nullable=False)
+
+    clave: int
+    descripcion: int
+
+@dataclass
+class Sexo(db.Model):
+    __tablename__ = 'sexo'
+    clave = db.Column(db.Text(), nullable=False)
+    descripcion = db.Column(db.Text(), primary_key=True, nullable=False)
+
+    clave: int
+    descripcion: int
+
+@dataclass
+class Tipo_paciente(db.Model):
+    __tablename__ = 'tipopaciente'
+    clave = db.Column(db.Text(), nullable=False)
+    descripcion = db.Column(db.Text(), primary_key=True, nullable=False)
+
+    clave: int
+    descripcion: int
 
 @dataclass
 class Cambios(db.Model):
