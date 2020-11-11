@@ -2,8 +2,10 @@ from . import covid
 from sqlalchemy import text
 from app.models import Estados, Municipios, Registros, Cambios, Historia, Nuevos, Nacionalidad, Origen, Resultado,\
     Sector, Sexo, Tipo_paciente
+from app import connecta
+from app import pandita
+from flask import jsonify, make_response, send_file
 import json
-from flask import jsonify, make_response
 
 
 @covid.route('/sector/')
@@ -83,6 +85,8 @@ def nuevos():
 
 @covid.route('/')
 def home():
-
-
-    return 'routes'
+    obj = connecta.connect()
+    headers = pandita.get_headers(obj, 'nuevos')
+    df = pandita.postgresql_to_dataframe(obj, 'select * from nuevos limit 100', headers)
+    result = df.to_json('nuevos.json', orient='split', compression='infer')
+    return send_file('../nuevos.json', as_attachment=True)
