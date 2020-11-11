@@ -83,7 +83,7 @@ def nuevos():
     print(nuevos.query.count())
     return make_response(jsonify(nuevos), 200)
 
-@covid.route('/')
+@covid.route('/home')
 def home():
     obj = connecta.connect()
     headers = pandita.get_headers(obj, 'nuevos')
