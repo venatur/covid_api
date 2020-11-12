@@ -9,7 +9,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 class Config:
     # Define the database - we are working with
     # SQLite for this example
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:12345@localhost/covid'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:covid@localhost/covid'
     DATABASE_CONNECT_OPTIONS = {}
     SQLALCHEMY_POOL_SIZE = 20
     SQLALCHEMY_MAX_OVERFLOW = 10
@@ -47,7 +47,7 @@ class DevelopmentConfig(Config):
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:12345@localhost/covid'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:covid@localhost/covid'
 
 
 class TestingConfig(Config):

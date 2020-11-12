@@ -11,7 +11,7 @@ def connect():
         "host": "localhost",
         "database": "covid",
         "user": "postgres",
-        "password": "12345"
+        "password": "covid"
         }
     try:
         # connect to the PostgreSQL server
