@@ -4,7 +4,7 @@ from app.models import Estados, Municipios, Registros, Cambios, Historia, Nuevos
     Sector, Sexo, Tipo_paciente
 from app import connecta
 from app import pandita
-from flask import jsonify, make_response, send_file
+from flask import jsonify, make_response, send_file, Response, request
 import json
 
 
@@ -77,16 +77,23 @@ def historia():
     #print(historia)
     return make_response(jsonify(historia), 200)
 
+
 @covid.route('/nuevos/')
 def nuevos():
     nuevos = Nuevos.query.yield_per(10000).enable_eagerloads(False).all()
     print(nuevos.query.count())
     return make_response(jsonify(nuevos), 200)
 
-@covid.route('/home')
+
+@covid.route('/home', methods=['GET'])
 def home():
     obj = connecta.connect()
     headers = pandita.get_headers(obj, 'nuevos')
-    df = pandita.postgresql_to_dataframe(obj, 'select * from nuevos limit 100', headers)
-    result = df.to_json('nuevos.json', orient='split', compression='infer')
-    return send_file('../nuevos.json', as_attachment=True)
+    month = request.args["month"]
+    if request.args:
+        print(month)
+        df = pandita.postgresql_to_dataframe(obj, "select * from nuevos where to_char(fecha_actualizacion,'MM') = '%s'" % month, headers)
+        return Response(df.to_json(orient='split'), mimetype='application/json')
+    else:
+        df = pandita.postgresql_to_dataframe(obj, 'select * from nuevos', headers)
+        return Response(df.to_json(orient='split'), mimetype='application/json')
